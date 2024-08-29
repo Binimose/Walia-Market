@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">379493253637-8kif7drjd4fikqi9u7rtkajam7jqfkeh.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">379493253637</string>
+    <string name="google_api_key" translatable="false">AIzaSyAkJ0kUh3hZ4rb10nLTkbmnEjWi-ZNeLfY</string>
+    <string name="google_app_id" translatable="false">1:379493253637:android:5c30ec61fb4390e7e3526c</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAkJ0kUh3hZ4rb10nLTkbmnEjWi-ZNeLfY</string>
+    <string name="google_storage_bucket" translatable="false">wallia-market.appspot.com</string>
+    <string name="project_id" translatable="false">wallia-market</string>
+</resources>

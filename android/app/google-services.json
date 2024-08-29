@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "379493253637",
+    "project_id": "wallia-market",
+    "storage_bucket": "wallia-market.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379493253637:android:5c30ec61fb4390e7e3526c",
+        "android_client_info": {
+          "package_name": "com.example.waliamarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "379493253637-8kif7drjd4fikqi9u7rtkajam7jqfkeh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkJ0kUh3hZ4rb10nLTkbmnEjWi-ZNeLfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "379493253637-8kif7drjd4fikqi9u7rtkajam7jqfkeh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
