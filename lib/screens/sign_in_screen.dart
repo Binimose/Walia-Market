@@ -43,7 +43,7 @@ class _SignInScreenState extends State<SignInScreen> {
               children: [
                 Image.asset(
                   'assets/images/logo.jpg',
-                  height: screenSize.height * 0.3,
+                  height: screenSize.height * 0.25,
                   width: screenSize.width * 1,
                 ),
                 Container(

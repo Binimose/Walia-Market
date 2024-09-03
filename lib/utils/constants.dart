@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:waliamarket/screens/home_screen.dart';
 
 const double kAppBarHeight = 80;
 
@@ -18,7 +19,11 @@ const List<String> categoriesList = [
   "Essential"
 ];
 
-const List<Widget> screens = [
+const List<Widget> screens = [  
+         HomeScreen(),
+         Center(child: Text("accountScreen")),
+         Center(child: Text("cart screen")),
+         Center(child: Text("more Screen"))
 
 
 ];
