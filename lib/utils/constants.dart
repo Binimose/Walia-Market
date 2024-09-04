@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:waliamarket/screens/account_screen.dart';
+import 'package:waliamarket/screens/cart_screen.dart';
 import 'package:waliamarket/screens/home_screen.dart';
+import 'package:waliamarket/widget/simple_product.dart';
 
 const double kAppBarHeight = 80;
 
@@ -20,12 +23,20 @@ const List<String> categoriesList = [
 ];
 
 const List<Widget> screens = [  
-         HomeScreen(),
-         Center(child: Text("accountScreen")),
-         Center(child: Text("cart screen")),
-         Center(child: Text("more Screen"))
+        HomeScreen(),
+        AccountScreen(),
+        CartScreen(),
+        Center(child: Text("more Screen"))
 
 
+];
+
+const List< Widget> testChildern =[
+ SimpleProductWidget(url: "https://m.media-amazon.com/images/I/115yueUc1aL._SX90_SY90_.png",)
+ ,SimpleProductWidget(url: "https://m.media-amazon.com/images/I/11BIyKooluL._SX90_SY90_.png",),
+ SimpleProductWidget(url:"https://m.media-amazon.com/images/I/01cPTp7SLWL._SX90_SY90_.png" ),
+ SimpleProductWidget(url: "https://m.media-amazon.com/images/I/11M0jYc-tRL._SX90_SY90_.png")
+,SimpleProductWidget(url: "https://m.media-amazon.com/images/I/01cPTp7SLWL._SX90_SY90_.png",)
 ];
 
 const List<String> categoryLogos = [

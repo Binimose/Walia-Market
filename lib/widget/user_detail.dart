@@ -17,7 +17,7 @@ class UserDetail extends StatelessWidget {
     return Positioned(
       top: -offset/20,
       child: Container(
-         
+        
         decoration: const BoxDecoration(
           gradient: LinearGradient(colors:[yellowColor,Color.fromARGB(255, 29, 27, 27)],)
         ),
@@ -31,7 +31,7 @@ class UserDetail extends StatelessWidget {
                SizedBox(
                 width: screenSize.width,
                 
-                child: Text(" Delivered To${user.name}- ${user.address}",
+                child: Text(" Delivered To ${user.name}- ${user.address}",
                 maxLines:1,
                 overflow: TextOverflow.ellipsis,
                 

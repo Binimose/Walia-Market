@@ -7,7 +7,7 @@ const Color activeCyanColor = Color.fromARGB(255, 7, 7, 7);
 const Color backgroundColor = Color.fromARGB(255, 255, 255, 255);
 
 const List<Color> backgroundGradient = [
-  Color.fromARGB(255, 0, 0, 0),
+  Color.fromARGB(255, 14, 13, 13),
   Color.fromARGB(255, 0, 0, 0),
 ]; //Cyan, and a mix of Cyan and Green
 
