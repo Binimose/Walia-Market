@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:waliamarket/screens/account_screen.dart';
 import 'package:waliamarket/screens/cart_screen.dart';
 import 'package:waliamarket/screens/home_screen.dart';
+import 'package:waliamarket/screens/more_screen.dart';
 import 'package:waliamarket/widget/simple_product.dart';
 
 const double kAppBarHeight = 80;
@@ -26,7 +27,7 @@ const List<Widget> screens = [
         HomeScreen(),
         AccountScreen(),
         CartScreen(),
-        Center(child: Text("more Screen"))
+        Morescreen()
 
 
 ];

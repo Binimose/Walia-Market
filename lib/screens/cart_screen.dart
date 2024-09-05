@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:waliamarket/model/user_detail.dart';
+import 'package:waliamarket/widget/cart_item_widget.dart';
 import 'package:waliamarket/widget/custom_primery_button.dart';
 import 'package:waliamarket/widget/search_bar.dart';
 import 'package:waliamarket/widget/user_detail.dart';
@@ -32,7 +33,14 @@ class CartScreen extends StatelessWidget {
               },
                color:Colors.black,
             child:const Text('Proceed To Buy (n) Item',style: TextStyle(color:Colors.white),)),
+        ),
+       Expanded(child:ListView.builder(
+       itemCount: 5,
+        itemBuilder:(context,index){
+          return CartItemWidget();
+        }
         )
+       )
       ],
       
     ),
