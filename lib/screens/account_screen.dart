@@ -17,63 +17,65 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = Utils().getScreenSize();
-    return Scaffold(
-    backgroundColor: Colors.white,
-    appBar: AccountScreenAppBar(),
-    body:SingleChildScrollView(
-     child: SizedBox(
-      width:screenSize.width,
-      height:screenSize.height,
-       child:  Column(
-          children: [
-            IntroductionWidgetAccountScreen(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomPrimeryButton(
-              isLoading:false, 
-               onPressed:(){
-              
-               }, 
-               color:Colors.black,
-              child:const Text('Sign Out' ,style:TextStyle(color: Colors.white))
-               ),
-            ),
-             Padding(
-               padding: const EdgeInsets.all(8.0),
-               child: CustomPrimeryButton(
-               isLoading:false, 
-               onPressed:(){
-               
-               }, 
-               color:Colors.black,
-               child:const Text('Sell' ,style:TextStyle(color: Colors.white))
-               ),
-             ),
-             const ProductsShowcaseListView(title:'Your Order', children: testChildern),
-            
-            const Text('Requested Orders',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black ,fontSize: 20)),
-             Expanded(
-              child:ListView.builder(
-                itemCount: 5,
+    return SafeArea(
+      child: Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AccountScreenAppBar(),
+      body:SingleChildScrollView(
+       child: SizedBox(
+        width:screenSize.width,
+        height:screenSize.height,
+         child:  Column(
+            children: [
+              IntroductionWidgetAccountScreen(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CustomPrimeryButton(
+                isLoading:false, 
+                 onPressed:(){
                 
-                itemBuilder:(context,index){
-                 return const ListTile(
-                  title: Text("Order Block Shoe ",
+                 }, 
+                 color:Colors.black,
+                child:const Text('Sign Out' ,style:TextStyle(color: Colors.white))
+                 ),
+              ),
+               Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: CustomPrimeryButton(
+                 isLoading:false, 
+                 onPressed:(){
+                 
+                 }, 
+                 color:Colors.black,
+                 child:const Text('Sell' ,style:TextStyle(color: Colors.white))
+                 ),
+               ),
+               const ProductsShowcaseListView(title:'Your Order', children: testChildern),
+              
+              const Text('Requested Orders',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black ,fontSize: 20)),
+               Expanded(
+                child:ListView.builder(
+                  itemCount: 10,
                   
-                  style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),),
-                  subtitle: Text("Binyam Somewhere on the earth"),
-                 );
-                }
+                  itemBuilder:(context,index){
+                   return const ListTile(
+                    title: Text("Order Block Shoe ",
+                    
+                    style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),),
+                    subtitle: Text("Binyam Somewhere on the earth"),
+                   );
+                  }
+                  )
+                
                 )
               
-              )
-            
-
-          ],    
+      
+            ],    
+         ),
        ),
-     ),
-
-    ),
+      
+      ),
+      ),
     );
   }
 }

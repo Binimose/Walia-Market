@@ -2,11 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:waliamarket/layout/screen_layout.dart';
+import 'package:waliamarket/screens/result_screen.dart';
 import 'package:waliamarket/screens/sign_in_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  // Ensure that plugin services are initialized so that Firebase can be initialized properly
+   
   WidgetsFlutterBinding.ensureInitialized();
 
   try {
@@ -30,7 +31,6 @@ void main() async {
   }
 
   runApp(const WaliaMarket());
-
 }
 
 class WaliaMarket extends StatelessWidget {
@@ -54,7 +54,7 @@ class WaliaMarket extends StatelessWidget {
             );
           } else if (user.hasData) {
              
-            return  ScreenLayout();
+            return  ResultScreen(query:'prime shoe');
           } else {
             return SignInScreen(); // or SignUpScreen(), depending on your logic
           }
