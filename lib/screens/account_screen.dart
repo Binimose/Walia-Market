@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:waliamarket/model/user_detail.dart';
+import 'package:waliamarket/provider/user_detial_provider.dart';
 import 'package:waliamarket/utils/color_themes.dart';
 import 'package:waliamarket/utils/constants.dart';
 import 'package:waliamarket/utils/utils.dart';
@@ -50,7 +53,7 @@ class _AccountScreenState extends State<AccountScreen> {
                  child:const Text('Sell' ,style:TextStyle(color: Colors.white))
                  ),
                ),
-               const ProductsShowcaseListView(title:'Your Order', children: testChildern),
+               ProductsShowcaseListView(title:'Your Order', children: testChildern),
               
               const Text('Requested Orders',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black ,fontSize: 20)),
                Expanded(
@@ -81,12 +84,14 @@ class _AccountScreenState extends State<AccountScreen> {
 }
 
 class IntroductionWidgetAccountScreen extends StatelessWidget {
+
   const IntroductionWidgetAccountScreen({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    UserDetailModel? userDetail = Provider.of<UserDetialProvider>(context).userDetail;
     return Container(
       height: kAppBarHeight/2,
       decoration: BoxDecoration(
@@ -110,11 +115,11 @@ class IntroductionWidgetAccountScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: RichText(text:const TextSpan(
+            child: RichText(text:TextSpan(
               
               children: [
-                TextSpan(text:'Hello,  ', style: TextStyle(color:Colors.black,fontSize: 20)),
-                TextSpan(text:'Binimose',style: TextStyle(color:Colors.black,fontSize: 20,fontWeight:FontWeight.bold))
+                const TextSpan(text:'Hello,  ', style: TextStyle(color:Colors.black,fontSize: 20)),
+                TextSpan(text:userDetail?.name,style: const TextStyle(color:Colors.black,fontSize: 20,fontWeight:FontWeight.bold))
               ]
             )),
           )

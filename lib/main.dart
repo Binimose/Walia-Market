@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:waliamarket/model/product_model.dart';
-import 'package:waliamarket/screens/product_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:waliamarket/layout/screen_layout.dart';
+import 'package:waliamarket/provider/user_detial_provider.dart';
 import 'package:waliamarket/screens/sign_in_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -38,31 +39,32 @@ class WaliaMarket extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Walia-Market',
-      theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: Colors.white,
-        useMaterial3: true,
-      ),
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, AsyncSnapshot<User?> user) {
-          if (user.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(color: Colors.black),
-            );
-          }else if (user.hasData) {
-            
-             
-            return ProductScreen(productModel:ProductModel(
-              url: "https://m.media-amazon.com/images/I/11uufjN3lYL._SX90_SY90_.png", 
-            productName:'Book Cart', cost:300, discount:200, uid: '', sellerName: 
-            'Binimose', sellerUid:'', rating:4, noOfRating: 5),);
-          } else {
-            return SignInScreen();
-          }
-        },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserDetialProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Walia-Market',
+        theme: ThemeData.light().copyWith(
+          scaffoldBackgroundColor: Colors.white,
+          useMaterial3: true,
+        ),
+        home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, AsyncSnapshot<User?> user) {
+            if (user.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(color: Colors.black),
+              );
+            } else if (user.hasData) {
+               
+              return  ScreenLayout();
+            } else {
+              return SignInScreen(); // or SignUpScreen(), depending on your logic
+            }
+          },
+        ),
       ),
     );
   }

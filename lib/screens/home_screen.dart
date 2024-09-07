@@ -4,15 +4,11 @@ import 'package:waliamarket/utils/constants.dart';
 import 'package:waliamarket/widget/ads_banner.dart';
 import 'package:waliamarket/widget/catagory.dart';
 import 'package:waliamarket/widget/product_List.dart';
-
 import 'package:waliamarket/widget/search_bar.dart';
-import 'package:waliamarket/widget/simple_product.dart';
 import 'package:waliamarket/widget/user_detail.dart';
 
 class HomeScreen extends StatefulWidget {
-  final double offset = 0;
-
-  const HomeScreen({super.key,});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -23,12 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   double offset = 0;
 
   @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
   void initState() {
     super.initState();
     controller.addListener(() {
@@ -36,6 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
         offset = controller.position.pixels;
       });
     });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -54,28 +50,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 controller: controller,
                 child: Column(
                   children: [
-                     SizedBox(height: 13,),
-                    const CategoryHorizontalView(), 
-                    // Ensure this widget is correctly defined
-                    
+                    const SizedBox(height: 13),
+                    const CategoryHorizontalView(), // Ensure this widget is correctly defined
                     const AdBannerWidget(), // Ensure this widget is correctly defined
-                    ProductsShowcaseListView(title: "Upto 70% off", children: [
-                      SimpleProductWidget(url: largeAds[0]),
-                    ]),
-                    ProductsShowcaseListView(title: "Upto 60% off", children: [
-                      SimpleProductWidget(url: largeAds[0]),
-                    ]),
-                    ProductsShowcaseListView(title: "Upto 50% off", children: [
-                      SimpleProductWidget(url: largeAds[0]),
-                    ]),
-                    ProductsShowcaseListView(title: "Explore", children: [
-                      SimpleProductWidget(url: largeAds[0]),
-                    ]),
+                    ProductsShowcaseListView(
+                      title: "Upto 70% off",
+                      children: testChildern, // Ensure 'testChildern' is defined properly
+                    ),
+                    ProductsShowcaseListView(
+                      title: "Upto 60% off",
+                      children: testChildern,
+                    ),
+                    ProductsShowcaseListView(
+                      title: "Upto 50% off",
+                      children: testChildern,
+                    ),
+                    ProductsShowcaseListView(
+                      title: "Explore",
+                      children: testChildern,
+                    ),
                   ],
                 ),
               ),
             ),
-            UserDetail(offset: offset, user:User(name:'Binimose', address:"Addis Abeba")), // Removed const since offset is dynamic
+            UserDetail(
+              offset: offset,
+           
+            ), // Removed 'const' from UserDetail since offset is dynamic
           ],
         ),
       ),
