@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:waliamarket/model/product_model.dart';
 import 'package:waliamarket/screens/account_screen.dart';
 import 'package:waliamarket/screens/cart_screen.dart';
 import 'package:waliamarket/screens/home_screen.dart';
+import 'package:waliamarket/screens/more_screen.dart';
 import 'package:waliamarket/widget/simple_product.dart';
 
 const double kAppBarHeight = 80;
@@ -26,17 +28,45 @@ const List<Widget> screens = [
         HomeScreen(),
         AccountScreen(),
         CartScreen(),
-        Center(child: Text("more Screen"))
+        Morescreen()
 
 
 ];
 
-const List< Widget> testChildern =[
- SimpleProductWidget(url: "https://m.media-amazon.com/images/I/115yueUc1aL._SX90_SY90_.png",)
- ,SimpleProductWidget(url: "https://m.media-amazon.com/images/I/11BIyKooluL._SX90_SY90_.png",),
- SimpleProductWidget(url:"https://m.media-amazon.com/images/I/01cPTp7SLWL._SX90_SY90_.png" ),
- SimpleProductWidget(url: "https://m.media-amazon.com/images/I/11M0jYc-tRL._SX90_SY90_.png")
-,SimpleProductWidget(url: "https://m.media-amazon.com/images/I/01cPTp7SLWL._SX90_SY90_.png",)
+List< Widget> testChildern =[
+ SimpleProductWidget(productModel:ProductModel(
+                url:"https://m.media-amazon.com/images/I/61jmYNrfVoL._SX3000_.jpg", 
+                productName:'Book',
+                 cost:500,
+                  discount:100, 
+                  uid: '',
+                   sellerName: 'Binimose', 
+                   sellerUid: '', 
+                   rating: 3, 
+                   noOfRating: 5),
+
+ ),
+  SimpleProductWidget(productModel:ProductModel(
+                url:"https://m.media-amazon.com/images/I/61jmYNrfVoL._SX3000_.jpg", 
+                productName:'Book',
+                 cost:500,
+                  discount:100, 
+                  uid: '',
+                   sellerName: 'Binimose', 
+                   sellerUid: '', 
+                   rating: 3, 
+                   noOfRating: 5),
+  ),
+   SimpleProductWidget(productModel:ProductModel(
+                url:"https://m.media-amazon.com/images/I/61jmYNrfVoL._SX3000_.jpg", 
+                productName:'Book',
+                 cost:500,
+                  discount:100, 
+                  uid: '',
+                   sellerName: 'Binimose', 
+                   sellerUid: '', 
+                   rating: 3, 
+                   noOfRating: 5),)
 ];
 
 const List<String> categoryLogos = [

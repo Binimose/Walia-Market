@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waliamarket/screens/result_screen.dart';
 import 'package:waliamarket/utils/constants.dart';
 
 class CategoryHorizontalView extends StatelessWidget {
@@ -28,15 +29,23 @@ class CategoryHorizontalView extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(categoryLogos[index]),
-                  ),
-                  const SizedBox(height: 8), // Space between image and text
-                  Text(categoriesList[index]),
-                ],
+              child: GestureDetector(
+                onTap:(){
+                  Navigator.push(context, MaterialPageRoute(builder:(context){
+                    return ResultScreen(query:  categoriesList[index],);
+
+                  }));
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(categoryLogos[index]),
+                    ),
+                    const SizedBox(height: 8), // Space between image and text
+                    Text(categoriesList[index]),
+                  ],
+                ),
               ),
             );
           },
