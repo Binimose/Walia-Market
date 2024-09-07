@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:waliamarket/provider/user_detial_provider.dart';
+import 'package:waliamarket/resource/cloud_firestore.dart';
 import 'package:waliamarket/utils/constants.dart';
 
 class ScreenLayout extends StatefulWidget {
@@ -18,6 +21,12 @@ class _ScreenLayoutState extends State<ScreenLayout> {
     _pageController.dispose(); // Moved _pageController.dispose() before super.dispose()
     super.dispose();
   }
+  @override
+
+  void initState(){
+    super.initState();
+    CloudFireStorre().getNameAndAddress();
+  }
 
   void changePage(int page) { // Added return type 'void' for consistency
     _pageController.jumpToPage(page);
@@ -28,6 +37,7 @@ class _ScreenLayoutState extends State<ScreenLayout> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<UserDetialProvider>(context).getData();
     return DefaultTabController(
       length: 4,
       child: Scaffold(
