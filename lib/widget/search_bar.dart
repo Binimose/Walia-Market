@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waliamarket/screens/result_screen.dart';
 import 'package:waliamarket/screens/search_screen.dart';
 import 'package:waliamarket/utils/color_themes.dart';
 import 'package:waliamarket/utils/constants.dart';
@@ -66,6 +67,11 @@ class SearchBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 ],
               ),
               child: TextField(
+                onSubmitted: (String query){
+                   Navigator.push(context, MaterialPageRoute(builder: (context){
+                     return ResultScreen(query: query);
+                   }));
+                },
                 readOnly: isReadOnly,
                 onTap: () {
                   if(isReadOnly){

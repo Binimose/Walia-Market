@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:waliamarket/model/product_model.dart';
+import 'package:waliamarket/screens/product_screen.dart';
 import 'package:waliamarket/utils/utils.dart';
 import 'package:waliamarket/widget/custom_simple_rounded_button.dart';
 import 'package:waliamarket/widget/custom_squer_button.dart';
 import 'package:waliamarket/widget/product_informaion_Widget.dart';
 
 class CartItemWidget extends StatefulWidget {
-  const CartItemWidget({super.key});
+  final ProductModel productModel;
+  const CartItemWidget({super.key, required this.productModel});
 
   @override
   State<CartItemWidget> createState() => _CartItemWidgetState();
@@ -34,8 +37,17 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                   alignment: Alignment.topCenter,
                   child: SizedBox(
                     width: screenSize.width/3,
-                    child:Center(
-                    child:Image.network("https://m.media-amazon.com/images/I/11M0jYc-tRL._SX90_SY90_.png")
+                    child:GestureDetector(
+                      onTap: () {
+                           Navigator.push(context, MaterialPageRoute(builder:(context){
+                    return ProductScreen(productModel: widget.productModel);
+
+                  }));
+
+                      },
+                      child: Center(
+                      child:Image.network("https://m.media-amazon.com/images/I/11M0jYc-tRL._SX90_SY90_.png")
+                      ),
                     ),
                   ),
                 )
