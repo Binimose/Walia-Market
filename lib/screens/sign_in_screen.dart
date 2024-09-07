@@ -1,4 +1,5 @@
  import 'package:flutter/material.dart';
+import 'package:waliamarket/resource/authentication_method.dart';
 import 'package:waliamarket/screens/sign_up_screen.dart';
 import 'package:waliamarket/utils/utils.dart';
 import 'package:waliamarket/widget/custom_primery_button.dart';
@@ -14,7 +15,8 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
- 
+  final AuthenticationMethods auth = AuthenticationMethods();
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -41,7 +43,7 @@ class _SignInScreenState extends State<SignInScreen> {
               children: [
                 Image.asset(
                   'assets/images/logo.jpg',
-                  height: screenSize.height * 0.3,
+                  height: screenSize.height * 0.25,
                   width: screenSize.width * 1,
                 ),
                 Container(
@@ -82,8 +84,33 @@ class _SignInScreenState extends State<SignInScreen> {
                               color: Color.fromARGB(255, 255, 6, 6),
                             ),
                           ),
-                          isLoading:false,
-                          onPressed: (){},
+                          isLoading:isLoading,
+                          onPressed: ()async {
+                            setState(
+                              (){
+                                isLoading = true;
+                              }
+                            );
+                            String output = await  auth.signIn(
+                              
+                            email:_emailController.text,
+                            password:_passwordController.text
+                            );
+
+                             setState(
+                              (){
+                                isLoading =false;
+                              }
+                            );
+                            if(output =='success'){
+                                print('done');
+                            }else{
+
+                              Utils().showSnackBar(context: context, content:output);
+                              
+                            }
+
+                          },
                           color: const Color.fromARGB(255, 0, 0, 0),
                         ),
                       ),

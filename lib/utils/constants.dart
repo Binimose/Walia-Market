@@ -1,5 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:waliamarket/model/product_model.dart';
+import 'package:waliamarket/screens/account_screen.dart';
+import 'package:waliamarket/screens/cart_screen.dart';
+import 'package:waliamarket/screens/home_screen.dart';
+import 'package:waliamarket/screens/more_screen.dart';
+import 'package:waliamarket/widget/simple_product.dart';
 
 const double kAppBarHeight = 80;
 
@@ -18,9 +24,49 @@ const List<String> categoriesList = [
   "Essential"
 ];
 
-const List<Widget> screens = [
+const List<Widget> screens = [  
+        HomeScreen(),
+        AccountScreen(),
+        CartScreen(),
+        Morescreen()
 
 
+];
+
+List< Widget> testChildern =[
+ SimpleProductWidget(productModel:ProductModel(
+                url:"https://m.media-amazon.com/images/I/61jmYNrfVoL._SX3000_.jpg", 
+                productName:'Book',
+                 cost:500,
+                  discount:100, 
+                  uid: '',
+                   sellerName: 'Binimose', 
+                   sellerUid: '', 
+                   rating: 3, 
+                   noOfRating: 5),
+
+ ),
+  SimpleProductWidget(productModel:ProductModel(
+                url:"https://m.media-amazon.com/images/I/61jmYNrfVoL._SX3000_.jpg", 
+                productName:'Book',
+                 cost:500,
+                  discount:100, 
+                  uid: '',
+                   sellerName: 'Binimose', 
+                   sellerUid: '', 
+                   rating: 3, 
+                   noOfRating: 5),
+  ),
+   SimpleProductWidget(productModel:ProductModel(
+                url:"https://m.media-amazon.com/images/I/61jmYNrfVoL._SX3000_.jpg", 
+                productName:'Book',
+                 cost:500,
+                  discount:100, 
+                  uid: '',
+                   sellerName: 'Binimose', 
+                   sellerUid: '', 
+                   rating: 3, 
+                   noOfRating: 5),)
 ];
 
 const List<String> categoryLogos = [
