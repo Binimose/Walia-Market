@@ -11,6 +11,7 @@ class Utils {
   void showSnackBar({required BuildContext context, required String content}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        
         backgroundColor: Colors.black,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -23,7 +24,7 @@ class Utils {
           children: [
             Text(
               content,
-              maxLines: 2,
+              maxLines: 3,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: Colors.red,
