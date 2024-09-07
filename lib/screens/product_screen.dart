@@ -11,15 +11,17 @@ import 'package:waliamarket/widget/cost_widget.dart';
 import 'package:waliamarket/widget/custom_primery_button.dart';
 import 'package:waliamarket/widget/custom_simple_rounded_button.dart';
 import 'package:waliamarket/widget/rating_widget.dart';
+import 'package:waliamarket/widget/review_dialog.dart';
 import 'package:waliamarket/widget/review_widget.dart';
 import 'package:waliamarket/widget/search_bar.dart';
 import 'package:waliamarket/widget/user_detail.dart';
 
 class ProductScreen extends StatefulWidget {
   final ProductModel productModel;
+   
   const ProductScreen({
     Key? key,
-    required this.productModel,
+    required this.productModel,  
   }) : super(key: key);
 
   @override
@@ -92,9 +94,9 @@ class _ProductScreenState extends State<ProductScreen> {
                           CustomPrimeryButton(
                               child: const Text(
                                 "Buy Now",
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(color: Color.fromARGB(255, 255, 253, 253)),
                               ),
-                              color: Colors.orange,
+                              color: const Color.fromARGB(255, 0, 0, 0),
                               isLoading: false,
                               onPressed: () async {
                                  
@@ -103,19 +105,25 @@ class _ProductScreenState extends State<ProductScreen> {
                           CustomPrimeryButton(
                               child: const Text(
                                 "Add to cart",
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(color: Color.fromARGB(255, 243, 240, 240)),
                               ),
-                              color: yellowColor,
+                              color: const Color.fromARGB(255, 7, 7, 7),
                               isLoading: false,
                               onPressed: () async {
                                  
                               }),
                           spaceThingy,
-                          CustomSimpleRoundedButton(
+                          CustomPrimeryButton(
                               onPressed: () {
+                                showDialog(
+                                       context: context,
+                                    builder: (context) => ReviewDialog()
+                                   );
                                  
                               },
-                              text: "Add a review for this product"),
+                              isLoading:false,
+                              color:Colors.grey,
+                              child:Text( "Add a review for this product" ,style: TextStyle(color:Colors.black)),),
                         ],
                       ),
                     ),
@@ -143,7 +151,7 @@ class _ProductScreenState extends State<ProductScreen> {
               ),
             ),
             UserDetail(
-              offset: 0, user:User(name: '', address: ''),
+              offset: 0, 
             )
           ],
         ),

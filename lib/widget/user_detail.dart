@@ -1,18 +1,21 @@
  
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:waliamarket/model/user_detail.dart';
+import 'package:waliamarket/provider/user_detial_provider.dart';
 import 'package:waliamarket/utils/color_themes.dart';
 import 'package:waliamarket/utils/utils.dart';
 
 class UserDetail extends StatelessWidget {
   final double offset;
-  final User user;
-  const UserDetail({super.key, required this.offset, required this.user});
+ 
+  const UserDetail({super.key, required this.offset, });
 
   @override
   Widget build(BuildContext context) {
     var screenSize = Utils().getScreenSize();
+    UserDetailModel? UserDetail = Provider.of<UserDetialProvider>(context).userDetail;
     
     return Positioned(
       top: -offset/20,
@@ -31,7 +34,7 @@ class UserDetail extends StatelessWidget {
                SizedBox(
                 width: screenSize.width,
                 
-                child: Text(" Delivered To ${user.name}- ${user.address}",
+                child: Text(" Delivered To ${UserDetail?.name}- ${UserDetail?.address}",
                 maxLines:1,
                 overflow: TextOverflow.ellipsis,
                 

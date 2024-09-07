@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:waliamarket/model/product_model.dart';
+import 'package:waliamarket/screens/product_screen.dart';
 
 class SimpleProductWidget extends StatelessWidget {
-  final String url;
+  final ProductModel productModel;
 
   const SimpleProductWidget({
     Key? key,
-    required this.url,
+    required this.productModel,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Handle tap event
+         Navigator.push(context, MaterialPageRoute(builder:(context){
+          return ProductScreen(productModel: productModel,);
+         }));
       },
       child: AspectRatio(
         aspectRatio: 1 / 1,
@@ -22,7 +26,7 @@ class SimpleProductWidget extends StatelessWidget {
           color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.all(10),
-            child: Image.network(url),
+            child: Image.network(productModel.url),
           ),
         ),
       ),
