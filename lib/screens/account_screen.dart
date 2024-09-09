@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:waliamarket/model/user_detail.dart';
 import 'package:waliamarket/provider/user_detial_provider.dart';
+import 'package:waliamarket/screens/sell_screen.dart';
 import 'package:waliamarket/utils/color_themes.dart';
 import 'package:waliamarket/utils/constants.dart';
 import 'package:waliamarket/utils/utils.dart';
@@ -47,7 +48,9 @@ class _AccountScreenState extends State<AccountScreen> {
                  child: CustomPrimeryButton(
                  isLoading:false, 
                  onPressed:(){
-                 
+                    Navigator.push(context, MaterialPageRoute(builder:(context){
+                       return SellScreen();
+                    }));
                  }, 
                  color:Colors.black,
                  child:const Text('Sell' ,style:TextStyle(color: Colors.white))

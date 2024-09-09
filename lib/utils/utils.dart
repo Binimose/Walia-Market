@@ -1,7 +1,10 @@
+ 
+
 import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Utils {
   Size getScreenSize() {
@@ -13,7 +16,7 @@ class Utils {
       SnackBar(
         
         backgroundColor: Colors.black,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10),
             topRight: Radius.circular(10),
@@ -36,4 +39,18 @@ class Utils {
       ),
     );
   }
+
+  Future<Uint8List?> imagePicker(ImageSource source) async{
+     
+  final ImagePicker picker = ImagePicker();
+  final XFile? pickedFile = await picker.pickImage(source: source);
+   return await pickedFile?.readAsBytes();
+
+  }
+  
+  String getUid(){
+    return (10000 + Random().nextInt(10000)).toString();
+  }
+
+
 }

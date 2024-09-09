@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:waliamarket/utils/color_themes.dart';
 import 'package:waliamarket/utils/utils.dart';
 
 class ProductsShowcaseListView extends StatelessWidget {
