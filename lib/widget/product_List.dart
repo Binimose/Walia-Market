@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+
 import 'package:waliamarket/utils/utils.dart';
 
 class ProductsShowcaseListView extends StatelessWidget {
@@ -8,7 +9,7 @@ class ProductsShowcaseListView extends StatelessWidget {
   const ProductsShowcaseListView({
     Key? key,
     required this.title,
-    required this.children,
+    required this.children,  
   }) : super(key: key);
 
   @override

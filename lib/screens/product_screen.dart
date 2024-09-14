@@ -1,9 +1,13 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:waliamarket/model/product_model.dart';
 import 'package:waliamarket/model/review_model.dart';
 import 'package:waliamarket/model/user_detail.dart';
+import 'package:waliamarket/provider/user_detial_provider.dart';
+import 'package:waliamarket/resource/cloud_firestore.dart';
 import 'package:waliamarket/utils/color_themes.dart';
 import 'package:waliamarket/utils/constants.dart';
 import 'package:waliamarket/utils/utils.dart';
@@ -99,7 +103,8 @@ class _ProductScreenState extends State<ProductScreen> {
                               color: const Color.fromARGB(255, 0, 0, 0),
                               isLoading: false,
                               onPressed: () async {
-                                 
+                                CloudFireStorre().addProductToOrders(model:widget.productModel, userDetial: Provider.of<UserDetialProvider>(context,listen: false).userDetail!);
+                                 Utils().showSnackBar(context: context, content: 'Done !');
                               }),
                           spaceThingy,
                           CustomPrimeryButton(
@@ -110,6 +115,11 @@ class _ProductScreenState extends State<ProductScreen> {
                               color: const Color.fromARGB(255, 7, 7, 7),
                               isLoading: false,
                               onPressed: () async {
+
+                                 await CloudFireStorre().addProductToCart(productModel:widget.productModel);
+                                 Utils().showSnackBar(context: context, content: 'Added to cart.');
+
+
                                  
                               }),
                           spaceThingy,
@@ -117,7 +127,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               onPressed: () {
                                 showDialog(
                                        context: context,
-                                    builder: (context) => ReviewDialog()
+                                    builder: (context) => ReviewDialog(ProductUid:widget.productModel.uid,)
                                    );
                                  
                               },
@@ -128,22 +138,37 @@ class _ProductScreenState extends State<ProductScreen> {
                       ),
                     ),
                     
-                    SizedBox(
-  height: screenSize.height / 3, // Adjust the height as needed
-  child: ListView.builder(
-    shrinkWrap: true,
-    itemCount: 10, // Use actual count of reviews
-    itemBuilder: (context, index) {
-      return ReviewWidget(
-        review: ReviewModel(
-          senderName: 'Iphone 15 promax',
-          description: 'Highest quality',
-          rating: 4,
-        ),
-      );
+     SizedBox(
+                     height: screenSize.height / 3, // Adjust the height as needed
+                         child: StreamBuilder(
+                   stream: FirebaseFirestore.instance
+                     .collection("products")
+                     .doc(widget.productModel.uid)
+                     .collection("reviews")
+                     .snapshots(),
+    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return Center(child: CircularProgressIndicator());
+      
+      } 
+      
+      else if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
+        return ListView.builder(
+          itemCount: snapshot.data!.docs.length, 
+
+          itemBuilder: (context, index) {
+            ReviewModel model = ReviewModel.getModelFromJson(
+                json: snapshot.data!.docs[index].data());
+            return ReviewWidget(review: model);  
+          },
+        );
+      } else {
+        
+        return Center(child: Text('No reviews available'));
+      }
     },
   ),
-),
+)
 
 
                   ],

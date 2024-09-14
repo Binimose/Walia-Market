@@ -4,7 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:waliamarket/model/order_request_model.dart';
 import 'package:waliamarket/model/product_model.dart';
+import 'package:waliamarket/model/review_model.dart';
 import 'package:waliamarket/model/user_detail.dart';
 import 'package:waliamarket/utils/utils.dart';
 import 'package:waliamarket/widget/simple_product.dart';
@@ -14,7 +16,7 @@ class CloudFireStorre{
  FirebaseAuth auth = FirebaseAuth.instance;
 
 Future uploadNameAndAddress({required String name,required String address})async{
-  await firebaseFirestore.collection('user').doc(auth.currentUser!.uid).set({
+  await firebaseFirestore.collection('Users').doc(auth.currentUser!.uid).set({
     'name':name,
     'address':address
   });
@@ -22,7 +24,7 @@ Future uploadNameAndAddress({required String name,required String address})async
 
 }
 Future getNameAndAddress() async{
-  DocumentSnapshot snap= await firebaseFirestore.collection('user').doc(auth.currentUser!.uid).get();
+  DocumentSnapshot snap= await firebaseFirestore.collection('Users').doc(auth.currentUser!.uid).get();
 
   UserDetailModel user  = UserDetailModel.getModelFromJson((snap.data() as dynamic));
   return user;
@@ -59,7 +61,7 @@ Future<String>uploadProductToDatabase({
            noOfRating: 0
            );
 
-           await firebaseFirestore.collection('product').doc().set(product.getJson());
+           await firebaseFirestore.collection('products').doc().set(product.getJson());
            output = 'success';
 
 
@@ -78,7 +80,7 @@ Future<String>uploadProductToDatabase({
 
 Future<String> uploadImageToDatabase({required Uint8List image,required String uid})async{
 
-  Reference reference = FirebaseStorage.instance.ref().child('product').child(uid);
+  Reference reference = FirebaseStorage.instance.ref().child('products').child(uid);
   UploadTask uploadTask = reference.putData(image);
   TaskSnapshot task = await uploadTask;
   return task.ref.getDownloadURL();
@@ -87,7 +89,7 @@ Future<String> uploadImageToDatabase({required Uint8List image,required String u
 Future getProductFromDiscount(int discount)async{
   List<Widget> children=[];
   QuerySnapshot<Map<String, dynamic>> snap = await firebaseFirestore
-  .collection('product')
+  .collection('products')
   .where('discount',isEqualTo:discount).get();
   for(int i =0;i<snap.docs.length;i++){
     DocumentSnapshot docSnap = snap.docs[i];
@@ -99,5 +101,99 @@ Future getProductFromDiscount(int discount)async{
   return children;
 }
 
-
+ Future uploadReviewToDatabase({
+  required String productUid,
+  required ReviewModel model,
+}) async {
+  await firebaseFirestore
+      .collection('products')  
+      .doc(productUid)
+      .collection('reviews') 
+      .add(model.getJson());
 }
+
+Future addProductToCart({required ProductModel productModel}) async{
+  await firebaseFirestore
+  .collection('Users')
+  .doc(auth.currentUser!.uid)
+  .collection('cart')
+  .doc(productModel.uid)
+  .set(productModel.getJson());
+}
+
+Future deleteProductFromCart({ required String uid})async {
+  await firebaseFirestore
+  .collection('Users')
+  .doc(auth.currentUser!.uid)
+  .collection('cart').doc(uid)
+  .delete();
+}
+
+
+Future buyAllItemInCart({required UserDetailModel userDetial}) async {
+  QuerySnapshot<Map<String, dynamic>> snapshot = await firebaseFirestore
+      .collection('Users')
+      .doc(auth.currentUser!.uid)
+      .collection('cart')
+      .get();
+
+  for (int i = 0; i < snapshot.docs.length; i++) {
+    ProductModel model =
+        ProductModel.getModelFromJson(json: snapshot.docs[i].data());
+    
+    // Await the order process to ensure proper sequence
+    await addProductToOrders(model: model, userDetial: userDetial);
+
+    // Then delete from the cart
+    await deleteProductFromCart(uid: model.uid);
+  }
+}
+
+Future addProductToOrders({
+  required ProductModel model,
+  required UserDetailModel userDetial,
+}) async {
+  // Add to orders first
+  await firebaseFirestore
+      .collection('Users')
+      .doc(auth.currentUser!.uid)
+      .collection('orders')
+      .add(model.getJson());
+
+  // Send order request next
+  await sendOrderRequest(model: model, userDetial: userDetial);
+}
+
+Future sendOrderRequest({
+  required ProductModel model,
+  required UserDetailModel userDetial,
+}) async {
+  OrderRequestModel orderRequestModel = OrderRequestModel(
+    orderName: model.productName,
+    buyersAddress: userDetial.address,
+  );
+
+  // Send order request to the seller
+  await firebaseFirestore
+      .collection('Users')
+      .doc(model.sellerUid)
+      .collection('orderRequests')
+      .add(orderRequestModel.getJson());
+}
+
+ 
+  
+}
+
+
+
+
+
+ 
+
+
+
+
+
+
+

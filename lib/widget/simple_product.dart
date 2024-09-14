@@ -7,7 +7,7 @@ class SimpleProductWidget extends StatelessWidget {
 
   const SimpleProductWidget({
     Key? key,
-    required this.productModel,
+    required this.productModel,  
   }) : super(key: key);
 
   @override
